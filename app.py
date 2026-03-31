@@ -169,6 +169,7 @@ def track():
         abort(400)
 
     # Enrich the event with a server-side timestamp
+    """
     event = {
         "event_type": request.json.get("event_type", "unknown"),
         "page":       request.json.get("page", "/"),
@@ -176,6 +177,28 @@ def track():
         "user_id":    request.json.get("user_id", "anonymous"),
         "timestamp":  datetime.now(timezone.utc).isoformat(),
     }
+    """
+
+    
+    event = {
+    "event_type": request.json.get("event_type", "unknown"),
+    "page":       request.json.get("page", "/"),
+    "product_id": request.json.get("product_id"),
+    "user_id":    request.json.get("user_id", "anonymous"),
+    "session_id": request.json.get("session_id"),
+
+    # To add new fields
+    "deviceType": request.json.get("deviceType"),
+    "browser":    request.json.get("browser"),
+    "os":         request.json.get("os"),
+    "eventTime":  request.json.get("eventTime"),
+
+    # To keep server timestamp
+    "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+    
+
+
 
     send_to_event_hubs(event)
 
