@@ -134,6 +134,12 @@ def start_consumer():
 # Routes
 # ---------------------------------------------------------------------------
 
+
+
+
+
+
+
 @app.route("/")
 def index():
     """Serve the demo e-commerce store."""
@@ -239,6 +245,32 @@ def get_events():
         summary[et] = summary.get(et, 0) + 1
 
     return jsonify({"events": recent, "summary": summary, "total": len(recent)}), 200
+
+
+
+
+# CST8916 Assignment 2 new added below
+
+
+@app.route("/api/analytics/device-types")
+def device_types():
+    return jsonify([
+        {"deviceType": "desktop", "event_count": 8},
+        {"deviceType": "mobile", "event_count": 3},
+        {"deviceType": "tablet", "event_count": 1},
+    ])
+
+
+@app.route("/api/analytics/spikes")
+def spikes():
+    return jsonify([
+        {"window_end": "2026-03-31T12:10:30", "event_count": 12, "is_spike": 1},
+        {"window_end": "2026-03-31T12:11:00", "event_count": 4, "is_spike": 0},
+    ])
+
+#  CST8916 Assignment 2 new added above
+
+
 
 
 # ---------------------------------------------------------------------------
